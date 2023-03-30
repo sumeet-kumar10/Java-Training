@@ -1,25 +1,27 @@
 package program6;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 
 public class Exercise6 {
 public static void main(String[] args) throws FileNotFoundException {
-	
-	FileReader source = new FileReader("/Users/sumeetkumar/eclipse-workspace/Day7/src/program6/OldFile.txt");
-	
-	try(FileWriter destination = new FileWriter("/Users/sumeetkumar/eclipse-workspace/Day7/src/program6/NewFile.txt")){
+	int line;
+	try {
+		BufferedReader bufferedReader = new BufferedReader(new FileReader("/Users/sumeetkumar/eclipse-workspace/Day7/src/program6/OldFile.txt"));
+		FileWriter destination = new FileWriter(new File("/Users/sumeetkumar/eclipse-workspace/Day7/src/program6/NewFile.txt"));
 		
-		char[] ch = new char[8];
-		int i=0;
-		while((i = source.read(ch)) != -1) {
-			String s = new String(ch,0,i);
-			System.out.println(s);
-			destination.write(s);
+		while((line = bufferedReader.read()) != -1) {
+		destination.write((char)line);
+		destination.flush();
 		}
-	} catch(Exception e) {
-		e.printStackTrace();
+		
+		bufferedReader.close();
+		System.out.println("file copied");
+	}catch(Exception e) {
+		System.out.println("copied failed");
 	}
 }
 }

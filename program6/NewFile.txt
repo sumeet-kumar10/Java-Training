@@ -1,4 +1,3 @@
 
 
-
-this is the sample file
+this is the file created for the demonstration purpose

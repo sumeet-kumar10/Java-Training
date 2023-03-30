@@ -14,14 +14,16 @@ public class Exercise8 {
 			FileOutputStream destination = new FileOutputStream("/Users/sumeetkumar/eclipse-workspace/Day7/src/program8/Sample.txt");
 
 			ObjectOutputStream outputObject = new ObjectOutputStream(destination);
-			ObjectInputStream InputObject = new ObjectInputStream(source);
+			try (ObjectInputStream InputObject = new ObjectInputStream(source)) {
+				outputObject.writeObject(date);
+				System.out.println("The object was succesfully written to a file");
+				System.out.println(InputObject.readObject());
+			}
 
-			outputObject.writeObject(date);
-			System.out.println("The object was succesfully written to a file");
-			System.out.println(InputObject.readObject());
 			outputObject.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		}
 	}
 }
